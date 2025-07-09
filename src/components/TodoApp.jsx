@@ -17,6 +17,11 @@ const TodoApp = () => {
       setInputValue('');
     }
   };
+  //excluir tarefas
+  const handleDelete = (id) => {
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+    setTodos(updatedTodos);
+  };
   return (
     <div className="app-container">
       <h1 className="title">Lista De Tarefas</h1>
@@ -40,7 +45,12 @@ const TodoApp = () => {
         {todos.map((todo) => (
           <li key={todo.id} className="todo-item">
             {todo.text}
-            <button className="delete-button">Excluir</button>
+            <button
+              className="delete-button"
+              onClick={() => handleDelete(todo.id)}
+            >
+              Excluir
+            </button>
           </li>
         ))}
       </ul>
