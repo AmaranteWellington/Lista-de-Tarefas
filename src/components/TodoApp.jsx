@@ -7,7 +7,15 @@ const TodoApp = () => {
   const [inputValue, setInputValue] = React.useState('');
   // add tarefa
   const handleSubmit = (e) => {
-    e.preventDefault;
+    e.preventDefault();
+    if (inputValue.trim() !== '') {
+      const newTodo = {
+        id: Date.now(),
+        text: inputValue,
+      };
+      setTodos((prevTodos) => [...prevTodos, newTodo]);
+      setInputValue('');
+    }
   };
   return (
     <div className="app-container">
@@ -28,6 +36,14 @@ const TodoApp = () => {
 
       {/* lista de tarefas */}
       {todos.length === 0 && <p className="empty">Não há tarefas.</p>}
+      <ul className="todo-list">
+        {todos.map((todo) => (
+          <li key={todo.id} className="todo-item">
+            {todo.text}
+            <button className="delete-button">Excluir</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
